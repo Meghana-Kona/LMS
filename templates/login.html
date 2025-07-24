@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Admin Login - LMS{% endblock %}
+
+{% block content %}
+<div class="container pt-4" style="max-width: 450px;">
+
+  <!-- Back Button Above Card -->
+ 
+
+  <!-- Login Card -->
+  <div class="card shadow p-4">
+    <h3 class="text-center mb-4 text-success">Admin Login</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control"
+               placeholder="Enter admin username"
+               value="{{ request.form.username if error else '' }}" required>
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control"
+               placeholder="Enter password" required>
+      </div>
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+      <button class="btn btn-success w-100">Login</button>
+    </form>
+  </div>
+   <div class="mb-3">
+    <a class="btn btn-secondary" href="javascript:history.back()"> Back</a>
+  </div>
+
+</div>
+{% endblock %}

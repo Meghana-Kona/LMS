@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Member Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-success fw-bold mb-4 shadow-sm p-2 bg-light rounded">👤 Welcome, {{ name }}</h2>
+  <p class="lead">Below are your issued books:</p>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped shadow-sm bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>Book Title</th>
+          <th>Issue Date</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Fine</th>
+        </tr>
+      </thead>
+      <tbody>
+  {% for book in issued_books %}
+  <tr>
+    <td>{{ book[0] }}</td> <!-- Book Title -->
+    <td>{{ book[1] }}</td> <!-- Issue Date -->
+
+    <!-- Due Date: Issue + 7 days -->
+    <td>{{ (book[1]|to_datetime + timedelta(days=7)).strftime('%Y-%m-%d') }}</td>
+
+    <td>{{ book[3] }}</td> <!-- Status -->
+
+    <!-- Fine -->
+    <td>
+      {% if book[3] == "Returned" %}
+        {% set return_date = book[2]|to_datetime %}
+      {% else %}
+        {% set return_date = now %}
+      {% endif %}
+      {% set due_date = book[1]|to_datetime + timedelta(days=7) %}
+      {% set late_days = (return_date - due_date).days %}
+      {% if late_days > 0 %}
+        ₹{{ late_days * 10 }}
+      {% else %}
+        ₹0
+      {% endif %}
+    </td>
+  </tr>
+
+  {% if book[3] == "Issued" %}
+  <tr>
+    <td colspan="5" class="text-end">
+      <a href="{{ url_for('member_return', issue_id=book[4]) }}" class="btn btn-warning btn-sm">Return Book</a>
+    </td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+</tbody>
+
+    </table>
+  </div>
+
+  <!-- Buttons -->
+  <div class="d-flex justify-content-between mt-4">
+    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
+    <a href="/member/logout" class="btn btn-danger">Logout</a>
+  </div>
+</div>
+{% endblock %}

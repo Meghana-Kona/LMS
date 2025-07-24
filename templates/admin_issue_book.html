@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Issue Book{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="text-primary mb-4">Issue Book</h2>
+
+  {% if success %}
+  <div class="alert alert-success text-center">{{ success }}</div>
+{% endif %}
+
+{% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+  <form method="POST">
+    <div class="mb-3">
+      <label class="form-label">Select Member</label>
+      <select class="form-select" name="member_id" required>
+        {% for member in members %}
+          <option value="{{ member[0] }}">{{ member[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Select Book</label>
+      <select class="form-select" name="book_id" required>
+        {% for book in books %}
+          <option value="{{ book[0] }}">{{ book[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Issue Book</button>
+  </form>
+ 
+    <a class="btn btn-secondary" href="javascript:history.back()"> Back</a>
+  
+</div>
+{% endblock %}

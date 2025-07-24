@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Manage Members{% endblock %}
+{% block content %}
+
+<h3 class="mb-4 text-primary"> Member Management</h3>
+
+<table class="table table-bordered table-striped bg-white shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for member in members %}
+    <tr>
+      <td>{{ member[0] }}</td>
+      <td>{{ member[1] }}</td>
+      <td>{{ member[2] }}</td>
+      <td>{{ member[3] }}</td>
+      <td>
+        <a href="/admin/member/delete/{{ member[0] }}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

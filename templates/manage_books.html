@@ -1,0 +1,62 @@
+<!-- templates/manage_books.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Books</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container py-5">
+  <h2 class="mb-4 text-success"> Book Management</h2>
+
+  <!-- Add Book Form -->
+  <form action="/admin/book/add" method="POST" class="row g-3 mb-4 bg-light p-4 rounded shadow">
+    <div class="col-md-3">
+      <input type="text" name="title" class="form-control" placeholder="Book Title" required>
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="author" class="form-control" placeholder="Author" required>
+    </div>
+    <div class="col-md-2">
+      <input type="text" name="isbn" class="form-control" placeholder="ISBN">
+    </div>
+    <div class="col-md-2">
+      <input type="number" name="quantity" class="form-control" placeholder="Qty" min="1" required>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success w-100">Add Book</button>
+    </div>
+  </form>
+
+ <!-- Book Table -->
+<table class="table table-bordered table-striped shadow-sm bg-white">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th><th>Title</th><th>Author</th><th>ISBN</th><th>Qty</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <form action="/admin/book/update/{{ book[0] }}" method="POST">
+        <td>{{ book[0] }}</td>
+        <td><input type="text" name="title" class="form-control" value="{{ book[1] }}" required></td>
+        <td><input type="text" name="author" class="form-control" value="{{ book[2] }}" required></td>
+        <td><input type="text" name="isbn" class="form-control" value="{{ book[3] }}"></td>
+        <td><input type="number" name="quantity" class="form-control" value="{{ book[4] }}" min="1" required></td>
+        <td>
+          <button class="btn btn-sm btn-primary">Update</button>
+          <a href="/admin/book/delete/{{ book[0] }}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </form>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+  <a href="/admin/dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+</body>
+</html>

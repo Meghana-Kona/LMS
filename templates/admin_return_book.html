@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Return Book</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container py-5">
+  <h2 class="text-danger mb-4">Return Book</h2>
+  {% if success %}
+  <div class="alert alert-success text-center">{{ success }}</div>
+{% endif %}
+
+  <form method="POST" class="row g-3 bg-light p-4 rounded shadow">
+    <div class="col-md-10">
+      <label>Select Issued Book</label>
+      <select name="issue_id" class="form-select" required>
+        {% for item in issued %}
+          <option value="{{ item[0] }}">{{ item[1] }} - {{ item[2] }} (Issued on {{ item[3] }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2 d-flex align-items-end">
+      <button class="btn btn-danger w-100">Mark Returned</button>
+    </div>
+  </form>
+
+  <a href="/admin/dashboard" class="btn btn-secondary mt-4">⬅️ Back to Dashboard</a>
+</div>
+</body>
+</html>

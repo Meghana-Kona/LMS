@@ -1,0 +1,11 @@
+
+body.login-bg {
+  background: url('https://cdn.pixabay.com/photo/2016/11/29/06/15/adult-1868750_1280.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+}

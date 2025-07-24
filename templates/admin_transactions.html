@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Transaction Log{% endblock %}
+{% block content %}
+
+<h3 class="mb-4 text-success"> Transaction Log</h3>
+
+<table class="table table-bordered table-striped bg-white shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>Member Name</th>
+      <th>Book Title</th>
+      <th>Issue Date</th>
+      <th>Return Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in transactions %}
+    <tr>
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[2] }}</td>
+      <td>{{ row[3] or 'Not Returned' }}</td>
+      <td>{{ row[4] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="mb-3">
+    <a class="btn btn-secondary" href="javascript:history.back()"> Back</a>
+  </div>
+
+{% endblock %}

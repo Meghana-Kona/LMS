@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Reports - Library Management System{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="text-center text-primary mb-4"> Reports Dashboard</h2>
+
+  <!-- Summary Cards -->
+   <div class="row text-center mb-5">
+    <div class="col-md-4">
+      <div >
+        <div >
+          <h3 >Issued Today:{{ daily|length }}</h3>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div >
+        <div >
+          <h3>Issued This Week:{{ weekly|length }}</h3>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div >
+        <div >
+          <h3>Issued This Month:{{ monthly|length }}</h3>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Report -->
+  <h4 class="text-secondary mb-3">Daily Report</h4>
+  <div class="table-responsive mb-5">
+    <table class="table table-bordered table-striped bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>Book Title</th>
+          <th>Member Name</th>
+          <th>Issue Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in daily %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Weekly Report -->
+  <h4 class="text-secondary mb-3"> Weekly Report</h4>
+  <div class="table-responsive mb-5">
+    <table class="table table-bordered table-striped bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>Book Title</th>
+          <th>Member Name</th>
+          <th>Issue Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in weekly %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Monthly Report -->
+  <h4 class="text-secondary mb-3">Monthly Report</h4>
+  <div class="table-responsive mb-5">
+    <table class="table table-bordered table-striped bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>Book Title</th>
+          <th>Member Name</th>
+          <th>Issue Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in monthly %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back </a>
+  </div>
+</div>
+{% endblock %}
