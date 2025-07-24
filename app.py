@@ -5,6 +5,9 @@ from datetime import timedelta
 from datetime import datetime, timedelta
 
 import sqlite3
+import os
+
+
 
 app = Flask(__name__)
 app.secret_key = 'lms_secret' 
@@ -372,12 +375,6 @@ def member_return(issue_id):
 
     return redirect(url_for('member_dashboard'))
 
-
-
-
-
-
-
 @app.context_processor
 def inject_globals():
     return {
@@ -386,16 +383,7 @@ def inject_globals():
     }
 
 
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000)) 
+    app.run(host='0.0.0.0', port=port)       
